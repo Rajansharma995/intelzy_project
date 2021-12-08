@@ -13,7 +13,7 @@ function App() {
   // getProvider();
   return (
     <div className="App">
-      <button onClick={clickHandler}>connect to  Wallet</button>
+      <button onClick={clickHandler}>connect to  Phantom</button>
     </div>
   );
 }
