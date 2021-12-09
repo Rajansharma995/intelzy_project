@@ -1,19 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
-import {
-  getProvider,
-
-} from "zebecprotocol-sdk";
-
+import Login from "./components/web/Login";
 function App() {
-  const clickHandler = () =>{
-    console.log("clicked")
-    getProvider();
-  }
-  // getProvider();
+  
+  // getProvier()
   return (
     <div className="App">
-      <button onClick={clickHandler}>connect to  Phantom</button>
+      <Login />
+     
     </div>
   );
 }
