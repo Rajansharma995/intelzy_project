@@ -4,13 +4,12 @@ import {getProvier} from '../../login/Phantom';
 import zebecLogo from '../../assets/images/zebec.png';
 import phantomLogo from '../../assets/images/phantom.png';
 import metamaskLogo from '../../assets/images/metamask.png'
-import {useNavigate} from 'react-router-dom';
 import { Dialog, Transition } from '@headlessui/react';
+import MainPage from '../pages/MainPage'
 const { PublicKey, Connection, clusterApiUrl } = require("@solana/web3.js");
 const connection = new Connection(clusterApiUrl('devnet'))
 // console.log(window.solana.isConnected)
 const Login = () => {
-  const navigate = useNavigate();
   const [pubKey, setPubKey] = useState('')
   const [isOpen, setIsOpen] = useState(false)
   
@@ -52,20 +51,13 @@ const Login = () => {
   
         // getProvier().disconnect();
         // localStorage.setItem('walletAddress', '')
-    const logOut = () => {
-      localStorage.setItem('walletAddress', '');
-      window.solana.on('disconnect', ()=> console.log('disconnected'));
-      setIsOpen(false)
-      setPubKey('')
-      window.solana.request({ method: "disconnect" }).then(() => navigate('/'))
-      
-    }
+    
   return (
     <>
     {localStorage.getItem('walletAddress') ?
         (<>
-            <h1>Welcome</h1>
-            <button className='bg-red-400 shadow-xl p-2 text-white rounded-xl' onClick={logOut}>Sign out</button>
+            
+            <MainPage setIsOpen={setIsOpen} setPubKey={setPubKey} />
           </>) : 
           (
             <div>
