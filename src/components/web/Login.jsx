@@ -11,21 +11,17 @@ const connection = new Connection(clusterApiUrl('devnet'))
 // console.log(window.solana.isConnected)
 const Login = () => {
   const navigate = useNavigate();
-  const [loginMode, setLoginMode] = useState('')
   const [pubKey, setPubKey] = useState('')
   const [isOpen, setIsOpen] = useState(false)
-  const changeHandler = (e) => {
-    const {value} = e.target;
-    setLoginMode(value)
-  }
-  const submitHandler = async (e) => {
+  
+  const submitHandler =  (e) => {
     const {innerText} = e.target;
     console.log(innerText)
     if (innerText.toLowerCase() === "phantom" && getProvier()){
       const provider = getProvier()
       provider.connect()
       .then(res => {
-        const message = `Sachin is Hero`;
+        const message = `Approve to connect to this App`;
         const encodedMessage = new TextEncoder().encode(message);
         window.solana.signMessage(encodedMessage, "utf8")
         .then(res => {
@@ -69,7 +65,7 @@ const Login = () => {
     {localStorage.getItem('walletAddress') ?
         (<>
             <h1>Welcome</h1>
-            <button className='bg-red-500 p-5 text-white rounded-xl' onClick={logOut}>Sign out</button>
+            <button className='bg-red-400 shadow-xl p-2 text-white rounded-xl' onClick={logOut}>Sign out</button>
           </>) : 
           (
             <div>
