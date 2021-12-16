@@ -7,4 +7,5 @@ export const getProvier =  () => {
       }else{
       window.open("https://phantom.app/", "_blank");
       }
+      
 }   
