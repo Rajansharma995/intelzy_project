@@ -11,3 +11,10 @@
   box-shadow: inset 0 0 5px rgb(238, 235, 235);
   border-radius: 30px;
 }
+
+::-webkit-file-upload-button {
+  /* background-image: url("../images/6484211441606988091-128.png"); */
+  /* border: none;
+  cursor: pointer;
+  width: 10%; */
+}

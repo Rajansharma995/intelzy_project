@@ -6,6 +6,7 @@ import WebLayout from "./components/layout/WebLayout";
 import SideBar from "./components/pages/static/SideBar";
 import Notifications from "./components/pages/Notifications";
 import ProtectedRoute from "./components/common/ProtectedRoute";
+import Profile from "./components/pages/Profile";
 function App() {
   const [isLoggedin, setIsLoggedin] = useState(localStorage.getItem('walletAddress') ? true : false)
   
@@ -20,7 +21,7 @@ function App() {
             <Route path='/home' element={<ProtectedRoute><MainPage/></ProtectedRoute>}></Route>
             <Route path='/notifications' element={<ProtectedRoute><Notifications/></ProtectedRoute>} />
             <Route path='/' element={isLoggedin ? <MainPage/> : <Login setIsLoggedin={setIsLoggedin}/>}></Route>
-            
+            <Route path='/profile' element={<ProtectedRoute><Profile></Profile></ProtectedRoute>}/>
           </Routes>
         </WebLayout>
       </Router>
