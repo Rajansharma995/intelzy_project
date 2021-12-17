@@ -7,14 +7,14 @@ import SideBar from "./components/pages/static/SideBar";
 import Notifications from "./components/pages/Notifications";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 function App() {
-  const [isLoggedin, setIsLoggedin] = useState(false)
-  console.log('navbar')
+  const [isLoggedin, setIsLoggedin] = useState(localStorage.getItem('walletAddress') ? true : false)
+  
   return (
     <div className="App">
       <Router>
         <WebLayout>
           {
-            isLoggedin && <SideBar setIsLoggedin={setIsLoggedin} />
+            (isLoggedin) && <SideBar setIsLoggedin={setIsLoggedin} />
           }
           <Routes>
             <Route path='/home' element={<ProtectedRoute><MainPage/></ProtectedRoute>}></Route>
