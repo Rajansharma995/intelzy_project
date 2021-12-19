@@ -30,11 +30,9 @@ const MainPage = ({setIsOpen, setPubKey}) => {
                         <div className='flex-1 overflow-y-auto'>
                             <div className='w-3/4 m-auto border-2'>
                                 <form action="" className='' onSubmit={submitHandler}>
+                                    <textarea className='px-5 focus:outline-none focus:ring-blue-400 focus:ring-1  w-full resize-none ' name="" id="" cols="20" rows="5" placeholder='Add new post'></textarea>
                                     <div className=''>
-                                        <textarea className='px-5 focus:outline-none focus:ring-blue-400 focus:ring-1  w-full resize-none ' name="" id="" cols="20" rows="5" placeholder='Add new post'></textarea>
-                                    </div>
-                                    <div>
-                                        <div className='flex justify-between items-center border-b-2 px-2'>
+                                        <div className='flex justify-between items-center border-b-2 py-1 px-2'>
                                             <div>
                                                 <label htmlFor="image" className='cursor-pointer'><ImageIcon/></label>
                                                 <input type='file' id='image' className='hidden'/>
