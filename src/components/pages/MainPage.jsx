@@ -1,24 +1,29 @@
-import React,{useEffect} from 'react'
+import React,{useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom';
 import SideBar from './static/SideBar';
 import {ReactComponent as ImageIcon} from '../../assets/icons/image.svg';
 import PostCard from '../../components/common/PostCard'
+import {ReactComponent as NetflixIcon} from '../../assets/icons/netflix.svg';
 import '../../assets/css/MainPage.css';
-const MainPage = ({setIsOpen, setPubKey}) => {
+import { getProvier } from '../../login/Phantom';
+const MainPage = ({setIsOpen}) => {
     const navigate = useNavigate();
+   const [pubKey, setPubKey] = useState('')
    
-    
+  
     useEffect(() => {
-        console.log('test1')
-        const timeOut = setTimeout(() => {
-            console.log('test-mid')
-            console.log(localStorage.getItem('walletAddress'))
-          if(localStorage.getItem('walletAddress')){
-            console.log('test2')
-            window.solana.request({method:'connect'})
-           }
-        window.solana.on('connect', () => console.log('connected'))
-        }, 1000);
+       setTimeout(async () => {
+        try{
+            const Provider = getProvier();
+            const res = await Provider.connect()
+            console.log('res is ',res)
+            setPubKey(res.publicKey.toString())
+        }catch(err){
+            console.log(err)
+        }
+            
+        
+        }, 2000);
         // return () => clearTimeout(timeOut)
       } ,[])
       const submitHandler = (e) => {
@@ -26,7 +31,9 @@ const MainPage = ({setIsOpen, setPubKey}) => {
       }
     return (
         <>
-            <div className='flex flex-1 h-full  overflow-y-auto'>
+        {
+            !pubKey ? 'loading...' : (
+                <div className='flex flex-1 h-full  overflow-y-auto'>
                         <div className='flex-1 overflow-y-auto'>
                             <div className='w-3/4 m-auto border-2'>
                                 <form action="" className='' onSubmit={submitHandler}>
@@ -41,11 +48,12 @@ const MainPage = ({setIsOpen, setPubKey}) => {
                                         </div>
                                     </div>
                                 </form>
+                                {/* <NetflixIcon/> */}
                                 <div>
                                     {[1,2,3,4,5].map((num) => {
                                         return(
                                             <div key={num}>
-                                                <PostCard/>
+                                                <PostCard pubKey={pubKey}/>
                                             </div>
                                         )
                                     })}
@@ -56,6 +64,9 @@ const MainPage = ({setIsOpen, setPubKey}) => {
                     <input type="text" className='bg-gray-200 p-2 px-10 rounded-full focus:outline-none  focus:bg-white focus:ring-1 focus:ring-blue-400 mt-3' placeholder='Search Zeb' />
                 </div>
             </div>
+            )
+        }
+            
         </>
     )
 }

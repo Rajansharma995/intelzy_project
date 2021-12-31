@@ -9,9 +9,9 @@ const PostCard = (props) => {
             <Link to='/profile'>
                 <div className='flex gap-x-3'>
                         <img src="https://source.unsplash.com/collection/190727/1519x580" alt="" className='h-10 w-10 rounded-full' />
-                        <p className='text-gray-500  '>
+                        <div className='text-gray-500  '>
                             <h1 className='font-bold'>
-                                {localStorage.getItem('walletAddress')}
+                                {props.pubKey}
                             </h1>
                             <p className='flex justify-between'>
                                 <code>
@@ -21,7 +21,7 @@ const PostCard = (props) => {
                                     {new Date().toLocaleDateString("en-US",{ month: 'short', day: 'numeric'})}
                                 </small>
                             </p>
-                        </p>
+                        </div>
                         
                 </div>
             </Link>
