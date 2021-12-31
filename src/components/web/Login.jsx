@@ -14,14 +14,12 @@ const Login = ({setIsLoggedin}) => {
   const [pubKey, setPubKey] = useState('')
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate()
-  const submitHandler =  (e) => {
-    const {innerText} = e.target;
-  
-    if (innerText.toLowerCase() === "phantom" && getProvier()){
+  const submitHandler = async (e) => {
       const provider = getProvier()
+      console.log(provider)
       provider.connect()
       .then(res => {
-
+        
         const message = `Approve to connect to this App`;
         const encodedMessage = new TextEncoder().encode(message);
         window.solana.signMessage(encodedMessage, "utf8")
@@ -31,13 +29,13 @@ const Login = ({setIsLoggedin}) => {
           setIsLoggedin(true)
           navigate('/home')
         })
-        
+
       }  
         )
       .catch(err => console.log(err))
 
       
-    } 
+    
 
     const get_balance = async () => {
 
@@ -103,10 +101,10 @@ const Login = ({setIsLoggedin}) => {
                               <span className='block w-full text-center italic'>Connect to wallet</span>
                               <span className='font-bold cursor-pointer' onClick={closeModal}>X</span>
                             </p>
-                            <ul onClick={submitHandler} className='font-bold text-xl pt-2 '>
+                            <ul className='font-bold text-xl pt-2 '>
                              
                                 <li className='p-3 flex items-center gap-1 hover:bg-green-300 hover:text-gray-600 transition-all duration-300 cursor-pointer rounded-md'>
-                                  <p className=''>Phantom</p>
+                                  <p className='' onClick={submitHandler}>Phantom</p>
                                   <img src={phantomLogo} alt="" className='h-7 w-7 object-cover'/>
                                 </li>
                              

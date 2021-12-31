@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { NavLink } from 'react-router-dom';
 import zebecLogo from '../../../assets/images/logo.png';
 import {ReactComponent as Bell} from '../../../assets/icons/bell.svg';
@@ -7,7 +7,11 @@ import {ReactComponent as Home} from '../../../assets/icons/home.svg';
 import {ReactComponent as Message} from '../../../assets/icons/message.svg';
 import {ReactComponent as Profile} from '../../../assets/icons/profile.svg';
 import { useNavigate } from 'react-router-dom';
+const { PublicKey, Connection, clusterApiUrl } = require("@solana/web3.js");
+const connection = new Connection(clusterApiUrl('devnet'))
 const SideBar = ({setIsLoggedin}) => {
+    
+    
     const navigate = useNavigate()
     const logOut = () => {
         
@@ -23,7 +27,7 @@ const SideBar = ({setIsLoggedin}) => {
     }
     return (
             <div className='w-1/5 overflow-hidden flex flex-col justify-between'>
-                        <div className='w-9/12 m-auto cursor-pointer flex flex-col gap-y-5 text-2xl font-semibold my-0'>
+                        <div className='w-9/12 m-auto cursor-pointer flex flex-col gap-y-5 text-xl my-0'>
                             <div className='flex-1'>
                                 <img src={zebecLogo} alt="" />
                             </div>
@@ -48,10 +52,12 @@ const SideBar = ({setIsLoggedin}) => {
                                     <Bookmark/>
                                     <p>Bookmarks</p>
                                 </div>
-                                <div className='flex flex-row items-center gap-x-3 hover:bg-gray-200 p-2 rounded-full'>
-                                    <Profile/>
-                                    <p>Profile</p>
-                                </div>
+                                <NavLink to='/profile' style={({ isActive }) => ({ color: isActive ? 'gray' : 'black' })}>
+                                    <div className='flex flex-row items-center gap-x-3 hover:bg-gray-200 p-2 rounded-full'>
+                                        <Profile/>
+                                        <p>{`${localStorage.getItem('walletAddress').slice(0,5)}..`}</p>
+                                    </div>
+                                </NavLink>
                             </div>
                             <NavLink to='/'>
                                 <button className='w-full bg-blue-500 hover:bg-blue-600 transition-all duration-500 px-5 py-3 rounded-full shadow-xl text-white' onClick={logOut}>
